@@ -43,5 +43,18 @@ center_frame.place(
     x=utils.width_prct(25),
     y=utils.height_prct(25),
 )
+
+btn1 = Button(
+    center_frame,
+    bg='#8CD790',
+    text='First Button',
+    bd=5,
+    fg='#54426B',
+    relief=GROOVE,
+    activebackground='#449DD1')
+
+btn1.place(x=utils.width_prct(25), y=utils.height_prct(25))
+
+
 # Runs the window
 root.mainloop()
