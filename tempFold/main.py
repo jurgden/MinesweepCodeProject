@@ -16,7 +16,7 @@ root.resizable(False, False)
 top_frame = Frame(
     root,
     bg='#AAFCB8',
-    width=1472,
+    width=settings.WIDTH,
     height=utils.height_prct(25)
 )
 
@@ -25,8 +25,8 @@ top_frame.place(x=0, y=0)
 left_frame = Frame(
     root,
     bg='#77AF9C',
-    width=368,
-    height=540
+    width=utils.width_prct(25),
+    height=utils.height_prct(75)
 )
 
 left_frame.place(x=0, y=180)
