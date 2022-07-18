@@ -1,11 +1,13 @@
 from tkinter import *
+import settings
+import utils
 
 # below out "root" and above our "mainloop" is the core internals code of the program
 root = Tk()
 # Overrides the settings of the window
 root.configure(bg="#8CD790")
 # window size/resolution
-root.geometry('1472x720')
+root.geometry(f'{settings.WIDTH}x{settings.HEIGHT}')
 # our top left software window title
 root.title("Minesweeper Projx")
 # this controls whether or not the user can resize the window (currently false)
@@ -15,7 +17,7 @@ top_frame = Frame(
     root,
     bg='#AAFCB8',
     width=1472,
-    height=180
+    height=utils.height_prct(25)
 )
 
 top_frame.place(x=0, y=0)
