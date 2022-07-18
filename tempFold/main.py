@@ -1,5 +1,6 @@
 from tkinter import *
 import settings
+from utils import height_prct
 import utils
 
 # below out "root" and above our "mainloop" is the core internals code of the program
@@ -29,6 +30,18 @@ left_frame = Frame(
     height=utils.height_prct(75)
 )
 
-left_frame.place(x=0, y=180)
+left_frame.place(x=0, y=utils.height_prct(25))
+
+center_frame = Frame(
+    root,
+    bg='#285943',
+    width=utils.width_prct(75),
+    height=utils.height_prct(75)
+)
+
+center_frame.place(
+    x=utils.width_prct(25),
+    y=utils.height_prct(25),
+)
 # Runs the window
 root.mainloop()
