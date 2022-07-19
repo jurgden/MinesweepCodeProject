@@ -1,7 +1,8 @@
 from tkinter import *
+from cell import Cell
 import settings
-from utils import height_prct
 import utils
+
 
 # below out "root" and above our "mainloop" is the core internals code of the program
 root = Tk()
@@ -44,16 +45,22 @@ center_frame.place(
     y=utils.height_prct(25),
 )
 
-btn1 = Button(
-    center_frame,
-    bg='#8CD790',
-    text='First Button',
-    bd=5,
-    fg='#54426B',
-    relief=GROOVE,
-    activebackground='#449DD1')
+c1 = Cell()
+c1.create_btn_object(center_frame)
+c1.cell_btn_object.place(
+    x=0, y=0
+)
 
-btn1.place(x=utils.width_prct(25), y=utils.height_prct(25))
+# btn1 = Button(
+# center_frame,
+# bg='#8CD790',
+# text='First Button',
+# bd=5,
+# fg='#54426B',
+# relief=GROOVE,
+# activebackground='#449DD1')
+
+# btn1.place(x=utils.width_prct(25), y=utils.height_prct(25))
 
 
 # Runs the window
