@@ -53,5 +53,8 @@ for x in range(settings.GRID_SIZE):
             column=x,
             row=y
         )
+Cell.randomize_mines()
+
+
 # Runs the window
 root.mainloop()

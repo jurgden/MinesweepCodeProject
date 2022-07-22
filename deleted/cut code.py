@@ -20,3 +20,7 @@
 # activebackground='#449DD1')
 
 # btn1.place(x=utils.width_prct(25), y=utils.height_prct(25))
+# def randomize_mines():
+#   for cell in Cell.all:
+#      if random.randint(0, 1) == 1:
+#         cell.is_mine = True
