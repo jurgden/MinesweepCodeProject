@@ -20,7 +20,6 @@ class Cell:
             location,
             width=12,
             height=4,
-            text=f'{self.x}, {self.y}'
         )
         btn.bind('<Button-1>', self.left_click_actions)  # left click
         btn.bind('<Button-3>', self.right_click_actions)  # right click
@@ -38,8 +37,9 @@ class Cell:
             if cell.x == x and cell.y == y:
                 return cell
 
-    def show_cell(self):
-        surrounded_cells = [
+    @property
+    def surrounded_cells(self):
+        cells = [
             self.get_cell_by_axis(self.x - 1, self.y - 1),
             self.get_cell_by_axis(self.x - 1, self.y),
             self.get_cell_by_axis(self.x - 1, self.y + 1),
@@ -49,7 +49,23 @@ class Cell:
             self.get_cell_by_axis(self.x + 1, self.y),
             self.get_cell_by_axis(self.x + 1, self.y + 1)
         ]
-        print(surrounded_cells)
+
+        cells = [
+            cell for cell in cells if cell is not None
+        ]
+        return cells
+
+    @property
+    def surrounded_cells_mines_length(self):
+        counter = 0
+        for cell in self.surrounded_cells:
+            if cell.is_mine:
+                counter += 1
+
+        return counter
+
+    def show_cell(self):
+        self.cell_btn_object.configure(text=self.surrounded_cells_mines_length)
 
     def show_mine(self):
         # logic for interrupting the game, and showing the player that they have lost the game
