@@ -1,4 +1,4 @@
-from tkinter import Button
+from tkinter import Button, Label
 import random
 import settings
 
@@ -25,10 +25,20 @@ class Cell:
         btn.bind('<Button-3>', self.right_click_actions)  # right click
         self.cell_btn_object = btn
 
+    def create_cell_count_label(self, location):
+        lbl = Label(
+            location,
+            text=f"Cells Left:{settings.CELL_COUNT}"
+        )
+        return lbl
+
     def left_click_actions(self, event):
         if self.is_mine:
             self.show_mine()
         else:
+            if self.surrounded_cells_mines_length == 0:
+                for cell_obj in self.surrounded_cells:
+                    cell_obj.show_cell()
             self.show_cell()
 
     def get_cell_by_axis(self, x, y):
@@ -36,6 +46,9 @@ class Cell:
         for cell in Cell.all:
             if cell.x == x and cell.y == y:
                 return cell
+
+    def get_surrounding_cells(self):
+        pass
 
     @property
     def surrounded_cells(self):
