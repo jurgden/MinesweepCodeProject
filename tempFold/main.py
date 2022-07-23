@@ -24,6 +24,19 @@ top_frame = Frame(
 
 top_frame.place(x=0, y=0)
 
+game_title = Label(
+    top_frame,
+    bg='#AAFCB8',
+    fg='#34a0a4',
+    text="Minesweeper Projx",
+    font=('Helvetica', 32, 'bold')
+)
+
+game_title.place(
+    x=utils.width_prct(30),
+    y=0
+)
+
 left_frame = Frame(
     root,
     bg='#77AF9C',
