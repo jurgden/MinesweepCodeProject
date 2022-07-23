@@ -1,16 +1,21 @@
 from tkinter import Button, Label
 import random
 import settings
+import ctypes
 
 
 class Cell:
     all = []
+
+    cell_count = settings.CELL_COUNT
 
     cell_count_label_object = None
 
     def __init__(self, x, y, is_mine=False):
         self.is_mine = is_mine
         self.cell_btn_object = None
+        self.is_opened = False
+        self.is_mine_candidate = False
         self.x = x
         self.y = y
 
@@ -33,9 +38,7 @@ class Cell:
             location,
             bg='#285943',
             fg='white',
-            text=f"Cells Left:{settings.CELL_COUNT}",
-            width=12,
-            height=4,
+            text=f"Cells Left:{Cell.cell_count}",
             font=('Helvetica', 16, 'bold')
         )
         Cell.cell_count_label_object = lbl
@@ -86,15 +89,32 @@ class Cell:
         return counter
 
     def show_cell(self):
-        self.cell_btn_object.configure(text=self.surrounded_cells_mines_length)
+        if not self.is_opened:
+            Cell.cell_count -= 1
+            self.cell_btn_object.configure(
+                text=self.surrounded_cells_mines_length)
+            # Replace the text of the cell count label with the new count
+            if Cell.cell_count_label_object:
+                Cell.cell_count_label_object.configure(
+                    text=f"Cells Left:{Cell.cell_count}"
+                )
+        # Mark the cell as opened if it is not already
+        self.is_opened = True
 
     def show_mine(self):
-        # logic for interrupting the game, and showing the player that they have lost the game
         self.cell_btn_object.configure(bg='red')
+        ctypes.windll.user32.MessageBoxW(
+            0, 'You clicked a mine!', 'Game Over', 0)
 
     def right_click_actions(self, event):
-        print(event)
-        print('right click')
+        if not self.is_mine_candidate:
+            self.cell_btn_object.configure(bg='#fdad54')
+            self.is_mine_candidate = True
+        else:
+            self.cell_btn_object.configure(
+                bg='SystemButtonFace',
+            )
+            self.is_mine_candidate = False
 
     @staticmethod
     def randomize_mines():
